@@ -1,0 +1,6 @@
+import("rJava")
+import("Rjmsjars")
+export("initialize.logger")
+export("to.logger")
+export("destroy.logger")
+
