@@ -2,25 +2,31 @@
 \alias{to.logger}
 
 \title{
-Logs a string
+sends a message
 }
 \description{
-The log function logs a string type to a message queue or topic.
+sends a message to a queue or topic, with a property and value eg. a client id
 }
 \usage{
-to.logger(obj, log)
+to.logger(obj, log, propertyName, propertyValue)
 }
 
 \arguments{
   \item{obj}{
-Obj is an rJava object that is created using the function \code{initialize.logger}. The logger has an active connection to activemq and maintains it.
+The object maintains a live connection to activeMQ for streaming messages.
 }
   \item{log}{
-The string you wish to log to a topic or a queue
+The message value (string only allowed) that you wish to send to a topic or a queue
+}
+ \item{propertyName}{
+This is a generic property that is used to set message headers. One property per message is allowed for now. This could easily be used for filtering messages when using topics.
+}
+  \item{propertyValue}{
+The value of the message header that is being set in propertyName.
 }
 }
 \details{
-Please ensure that the logger is created successfully before using this function.
+Please ensure that an activeMQ connection is created successfully before using this function.
 }
 \value{
 The function returns a boolean. If a message is delivered successfully, the result is true.
@@ -40,9 +46,10 @@ No further notes.
 \code{destroy.logger}
 }
 \examples{
-\dontrun{logger<-initialize.logger('tcp://localhost:61616','Q','queue:R:test','clientID','xxx-yy-zzz')
-result<-to.logger(logger,'Hello dolly.')
-dresult<-destroy.logger(logger)
+\dontrun{logger<-initialize.logger('tcp://localhost:61616',
+'Q','queue:R:test')
+send.status<-to.logger(logger,'Hello dolly.','clientID','xxx-yy-zzz')
+close.status<-destroy.logger(logger)
 }
 }
 \keyword{ to.logger }

@@ -1,0 +1,12 @@
+c771848ec376f5112301c533213642b8 *DESCRIPTION
+bb3ca60759f3202f1ae42e3519cd06bc *LICENSE
+99f472256df88b3690c94259f1c1f179 *NAMESPACE
+84f3165b3c9d9e89cf909393558cc698 *R/destroy.logger.R
+fdf87f4aa5b68f905714720cffe4a115 *R/initialize.logger.R
+9dd9b3a797b9efc7493dc95a533b77b9 *R/onLoad.R
+36378c2a1ce9e41a6ef6c6ab2f5c8e9c *R/to.logger.R
+a66af4e07268718cce892d40b4e429ee *inst/java/RjmsProducer-0.0.3.jar
+acbb9f7ef62be8ff5335985dc1db2c88 *man/Rjms-package.Rd
+1b18a4b91de69387f661035c4913a292 *man/destroy.logger.Rd
+49ca07b6eaad2cd2749eb997bef249fe *man/initialize.logger.Rd
+6688611760423f918a5969ef0caa9435 *man/to.logger.Rd

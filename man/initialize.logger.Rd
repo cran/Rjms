@@ -5,10 +5,10 @@
 Creates a logger
 }
 \description{
-This function creates a java object using rJava. The java object is an active connection to the activemq broker.
+Creates a connection. 
 }
 \usage{
-initialize.logger(url, type, name, propertyName, propertyValue)
+initialize.logger(url, type, name)
 }
 
 \arguments{
@@ -21,18 +21,13 @@ Type - 'Q' or a 'T', depending on whether you are trying to create a queue or a 
   \item{name}{
 The name of the queue or topic created.
 }
-  \item{propertyName}{
-This is a generic property that is used to set message headers. One property per broker is allowed for now. This could easily be used for filtering messages when using topics.
-}
-  \item{propertyValue}{
-The value of the message header that is being set in propertyName.
-}
+ 
 }
 \details{
-For the logger to be created, please ensure you have an activemq broker running in the background that the java instance could connect to.
+For the logger to be created, please ensure you have an activemq broker running in the background.
 }
 \value{
-a java object created using \code{.jnew}
+a connection to activeMQ
 }
 \references{
 
@@ -49,7 +44,8 @@ No further notes.
 \code{destroy.logger}
 }
 \examples{
-\dontrun{logger<-initialize.logger('tcp://localhost:61616','Q','queue:R:test','clientID','xxx-yy-zzz')
+\dontrun{logger<-initialize.logger('tcp://localhost:61616',
+'Q','queue:R:test')
 }
 }
 \keyword{messaging}
