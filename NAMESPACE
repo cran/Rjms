@@ -3,4 +3,8 @@ import("Rjmsjars")
 export("initialize.logger")
 export("to.logger")
 export("destroy.logger")
+export("destroy.consumer")
+export("initialize.consumer")
+export("consume")
+export("listen")
 

@@ -5,7 +5,7 @@
 Creates a logger
 }
 \description{
-Creates a connection. 
+Creates a connection to a logger
 }
 \usage{
 initialize.logger(url, type, name)
@@ -29,9 +29,7 @@ For the logger to be created, please ensure you have an activemq broker running 
 \value{
 a connection to activeMQ
 }
-\references{
 
-}
 \author{
 SMS Chauhan
 }
@@ -40,11 +38,12 @@ No further notes.
 }
 
 \seealso{
-\code{to.logger}
-\code{destroy.logger}
+\code{\link{to.logger}}
+\code{\link{destroy.logger}}
 }
 \examples{
-\dontrun{logger<-initialize.logger('tcp://localhost:61616',
+\dontrun{
+logger<-initialize.logger('tcp://localhost:61616',
 'Q','queue:R:test')
 }
 }

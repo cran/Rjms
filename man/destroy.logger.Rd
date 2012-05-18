@@ -22,9 +22,7 @@ A word of caution: Please ensure that the logger is created successfully before 
 \value{
 returns the status of closing a connection. True, if the activeMQ connection is closed successfully.
 }
-\references{
 
-}
 \author{
 SMS Chauhan
 }
@@ -37,7 +35,8 @@ No further notes.
 \examples{
 \dontrun{logger<-initialize.logger('tcp://localhost:61616',
 'Q','queue:R:test')
-send.status<-to.logger(logger,'Hello dolly.','clientID','xxx-yy-zzz')
+send.status<-to.logger(logger,'Hello dolly.',T,'clientID',
+'xxx-yy-zzz')
 close.status<-destroy.logger(logger)
  }
  }

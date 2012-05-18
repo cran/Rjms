@@ -7,6 +7,7 @@ R package to send messages to activeMQ
 }
 \description{
 The package can be used to fire messages to an activeMQ queue or topic. It has a wide variety of applications. One such common application is firing messages during processes with a large number of iterations. R does not provide the ability to interact with it while a certain piece of code is executing. This is where Rjms plays an important role - it enables you to see what's going on under the hood. 
+Recently, the capabiltiy to consume messages has also been added, with the limitation of listening messages to a specified queue. Topics haven't been implemented yet due to the lack of a clean callback capability. 
 In the iteration example, it's possible to fire intermediately results at the end of each iteration. These messages can either be viewed directly using the activeMQ web console, or a certain monitoring application can be built around it using Message Oriented Middleware.
 
 ActiveMQ is commonly used to implement basic elements of Enterprise Integrations patterns.
@@ -15,8 +16,8 @@ ActiveMQ is commonly used to implement basic elements of Enterprise Integrations
 \tabular{ll}{
 Package: \tab Rjms\cr
 Type: \tab Package\cr
-Version: \tab 0.0.2\cr
-Date: \tab 2011-11-03\cr
+Version: \tab 0.0.3\cr
+Date: \tab 2012-05-18\cr
 License: \tab LGPL-3\cr
 LazyLoad: \tab yes\cr
 }
@@ -27,8 +28,8 @@ This is accomplished by calling the R function:\cr
 \code{logger<-initialize.logger(url,type,name)}
 
 2) Send a message, or more messages \cr
-Once the logger is initialized, you can begin logging messages. The second step would be:\cr
-\code{result<-to.logger(logger,'Hello dolly.', propertyName, propertyValue)}
+Once the logger is initialized, you can begin logging messages. The logger can send message both as a string or a serialized R Object, set to T for a string.The second step would be:\cr
+\code{result<-to.logger(logger,'Hello dolly.',T, propertyName, propertyValue)}
 
 3) Kill the connection \cr 
 Dormant connections can slow down the system. It's always good to cleanup.:\cr
@@ -48,13 +49,21 @@ Apache ActiveMQ: Apache ActiveMQ is the most popular and powerful open source me
 \keyword{ Rjms }
 \keyword{messaging}
 \keyword{logger}
-\seealso{
 
-}
 \examples{
-\dontrun{logger<-initialize.logger('tcp://localhost:61616','Q'
-,'queue:R:test')
-send.status<-to.logger(logger,'Hello dolly.','clientID','xxx-yy-zzz')
+\dontrun{
+logger<-initialize.logger('tcp://localhost:61616',
+'Q','queue:R:test')
+L3 <- LETTERS[1:3]
+d <- data.frame(cbind(x=1, y=1:10), fac=
+sample(L3, 10, replace=TRUE))
+send.status<-to.logger(logger,d,F,'clientID',
+'xxx-yy-zzz')
 close.status<-destroy.logger(logger)
+consumer<-initialize.consumer('tcp://localhost:61616',
+'Q','queue:R:test')
+z<-consume(consumer,'clientID','xxx-yy-zzz')
+close.consumer<-destroy.consumer(consumer)
+identical(d,z)
 }
 }
