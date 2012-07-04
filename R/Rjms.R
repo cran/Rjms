@@ -26,13 +26,13 @@ initialize.consumer <- function(url, type, name) {
     obj <- .jnew("org/math/r/activemq/logger/Consumer", url, type, name)
     return(obj)
 }
-consume <- function(obj, propertyName = NULL, propertyValue = NULL, asString = F) {
+consume <- function(obj, propertyName = NULL, propertyValue = NULL, asString = F, timeOut=0) {
    if (is.null(propertyName) || is.null(propertyValue)) 
        {
         	propertyName <- .jnull("java/lang/String")
         	propertyValue <- .jnull("java/lang/String")
     	}
-    out <- .jcall(obj, "[B", "consume", propertyName, propertyValue)
+    out <- .jcall(obj, "[B", "consume", propertyName, propertyValue, .jlong(timeOut))
     if (is.jnull(out)) 
         message <- NULL else {
         if (!asString) 
@@ -44,13 +44,13 @@ destroy.consumer <- function(obj) {
     out <- .jcall(obj, "Z", "destroy")
 }
 
-listen <- function(consumer, property, value, exitCode = "#exit123", callback = printCallback, 
+listen <- function(consumer, property, value, asString, exitCode = "#exit123", callback = printCallback, 
     ...) {
     # default callback, prints the received messages
     printCallback <- function(x) print(x)
     
     # consume the first message and initialize x
-    x <- consume(consumer, property, value, ...)
+    x <- consume(consumer, property, value, asString)
     
     # keep consuming messages until an escape signal is received
     while (typeof(x) != typeof(exitCode)) {
@@ -59,6 +59,6 @@ listen <- function(consumer, property, value, exitCode = "#exit123", callback = 
             callback(x, ...)
         
         # keep consuming messages
-        x <- consume(consumer, property, value, ...)
+        x <- consume(consumer, property, value, asString)
     }
 }

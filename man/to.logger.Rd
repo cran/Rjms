@@ -8,8 +8,7 @@ sends a message
 sends a message to a queue or topic, with a property and value eg. a client id
 }
 \usage{
-to.logger(obj, log, asString = F, propertyName=NULL, 
-propertyValue=NULL)
+to.logger(obj, log, asString = F, propertyName=NULL, propertyValue=NULL)
 }
 
 \arguments{

@@ -8,8 +8,8 @@ listens to streaming messages
 listens to streaming message using the consume command unless an escape sequence is provided, apply the callback function to the received message
 }
 \usage{
-listen(consumer, property, value, exitCode = "#exit123", 
-callback = printCallback, ...)
+listen(consumer, property, value, asString, 
+		exitCode = "#exit123", callback = printCallback, ...)
 }
 \arguments{
   \item{consumer}{
@@ -20,6 +20,9 @@ a header property name set for the message using \code{to.logger}
 }
   \item{value}{
 the value of the property described above
+}
+\item{asString}{
+boolean. T if the incoming stream is a text message, F if not
 }
   \item{exitCode}{
 the consumer will stop listening to the messages if an exit code is received. Default is '#exit123'
@@ -55,8 +58,7 @@ env<-new.env(parent=globalenv())
 #initialize a logger
 logger<-initialize.logger('tcp://localhost:61616','Q','queue:R:test')
 #enqueue 100 random numbers from 1 to 100 on the queue
-lapply(1:100,function(x) to.logger(logger,sample(1:100,1)
-,asString=F,'clientID','xxx-yy-zzz'))
+lapply(1:100,function(x) to.logger(logger,sample(1:100,1),asString=F,'clientID','xxx-yy-zzz'))
 #enqueue the exit code
 to.logger(logger,"#exit123",asString=F,'clientID','xxx-yy-zzz')
 #close the connection
@@ -68,7 +70,7 @@ env$sumx<-0
 #store the numbers generated
 env$numc<-NULL
 #listen to the messages and apply a running total
-listen(consumer,'clientID','xxx-yy-zzz',callback=function(x)
+listen(consumer,'clientID','xxx-yy-zzz', asString=F, callback=function(x)
 {
 env$numc<-c(env$numc,x) 
 env$sumx=env$sumx+x 

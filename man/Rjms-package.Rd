@@ -3,7 +3,7 @@
 \alias{Rjms}
 \docType{package}
 \title{
-R package to send messages to ActiveMQ
+R package to send messages to activeMQ
 }
 \description{
 The package can be used to fire messages to an activeMQ queue or topic. It has a wide variety of applications. One such common application is firing messages during processes with a large number of iterations. R does not provide the ability to interact with it while a certain piece of code is executing. This is where Rjms plays an important role - it enables you to see what's going on under the hood. 
@@ -29,8 +29,7 @@ This is accomplished by calling the R function:\cr
 
 2) Send a message, or more messages \cr
 Once the logger is initialized, you can begin logging messages. The logger can send message both as a string or a serialized R Object, set to T for a string.The second step would be:\cr
-\code{to.logger(logger,'Hello dolly.',T, "type", 
- "BB2")}
+\code{result<-to.logger(logger,'Hello dolly.',T, propertyName, propertyValue)}
 
 3) Kill the connection \cr 
 Dormant connections can slow down the system. It's always good to cleanup.:\cr
