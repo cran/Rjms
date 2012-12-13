@@ -8,7 +8,8 @@ consumes a message
 consumes a single message every time the function is executed, from a queue with a given propertyName and propertyValue
 }
 \usage{
-consume(obj, propertyName, propertyValue)
+consume(obj, propertyName = NULL, propertyValue = NULL, 
+asString = F)
 }
 
 \arguments{
@@ -16,17 +17,20 @@ consume(obj, propertyName, propertyValue)
 a consumer as created from \code{\link{initialize.consumer}} 
 }
   \item{propertyName}{
-This is a generic property that is used to set message headers. One property per message is allowed for now. This could easily be used for filtering messages when using topics.
+Default is \code{NULL}. This is a generic property that is used to set message headers. One property per message is allowed for now. This could easily be used for filtering messages when using topics.
 }
   \item{propertyValue}{
-The value of the message header that is being set in propertyName.
+Default is \code{NULL}. The value of the message header that is being set in propertyName.
+}
+  \item{asString}{
+Boolean, default is F. T if you wish to read a Text message, F if an R object. 
 }
 }
 \details{
-Calling the consumer function consumes only one single message at a time from a queue. Topics aren't implemented currently. Also, to add that a consumer can read R objects directly using the native deserialization. As of now, the consume function can only consume objects serialized in R. Usage of the function to try and read any other type of object would result in R errors.
+Calling the consume function consumes only one single message at a time from a queue. Topics aren't implemented currently. Also, to add that a consumer can read R objects directly using the native deserialization. As of now, the consume function can only consume objects serialized in R. Usage of the function to try and read any other type of object would result in R errors.
 }
 \value{
-returns the body of the message, an R object if successful.
+returns the body of the message, an R object if asString=F and a string message if asString=T.
 }
 
 \author{

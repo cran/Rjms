@@ -8,7 +8,8 @@ listens to streaming messages
 listens to streaming message using the consume command unless an escape sequence is provided, apply the callback function to the received message
 }
 \usage{
-listen(consumer, property, value, exitCode = "#exit123", callback = printCallback, ...)
+listen(consumer, property, value, exitCode = "#exit123", 
+callback = printCallback, ...)
 }
 \arguments{
   \item{consumer}{
@@ -54,7 +55,8 @@ env<-new.env(parent=globalenv())
 #initialize a logger
 logger<-initialize.logger('tcp://localhost:61616','Q','queue:R:test')
 #enqueue 100 random numbers from 1 to 100 on the queue
-lapply(1:100,function(x) to.logger(logger,sample(1:100,1),asString=F,'clientID','xxx-yy-zzz'))
+lapply(1:100,function(x) to.logger(logger,sample(1:100,1)
+,asString=F,'clientID','xxx-yy-zzz'))
 #enqueue the exit code
 to.logger(logger,"#exit123",asString=F,'clientID','xxx-yy-zzz')
 #close the connection
